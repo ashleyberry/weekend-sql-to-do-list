@@ -1,9 +1,10 @@
 [x] set up workspace - index.html, css, router, server, jquery, database.sql file
 [x] install express, pg, node
-[ ] npm start that shit up
-[ ] .gitignore
-[ ] jquery working on client
-[ ] uses, requires, consts, globals, listen on server
+[x] .gitignore
+[x] npm start that shit up
+[x] jquery working on client
+[x] uses, requires, consts, globals, listen on server
+[x] prep router
 [ ] task input - 
 [ ] input button
 [ ] task input btn function
