@@ -1,0 +1,32 @@
+[x] set up workspace - index.html, css, router, server, jquery, database.sql file
+[x] install express, pg, node
+[ ] npm start that shit up
+[ ] .gitignore
+[ ] jquery working on client
+[ ] uses, requires, consts, globals, listen on server
+[ ] task input - 
+[ ] input button
+[ ] task input btn function
+[ ] delete btn on append
+[x] create 'weekend-to-do-app' db in postico
+[ ] create table: task(VARCHAR), completed(boolean)
+[ ] send data to SQL
+[ ] refresh function to show only incomplete tasks
+[ ] if incomplete, append complete btn
+[ ] if completed task, add class/id for visual change (ex: container bkgrd change gry to grn)
+[ ] if completed task, add class/id to check option off (in css)
+[ ] checked off task sent to db
+[ ] if deleted, remove task from front end
+[ ] if deleted, remove task from db
+
+[ ] background color
+[ ] font fam & size
+[ ] text color or bkgrd color should change if complete
+
+[ ] database.sql file includes all CREATE TABLE queries
+
+Reminders:
+--- you are a software engineer
+--- commit often
+--- read it once, then read it again - but slower
+--- go slow to go fast
