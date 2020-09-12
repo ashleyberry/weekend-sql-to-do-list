@@ -17,14 +17,18 @@ function addTask(){
         method: 'POST',
         url: '/taskList',
         data: taskToSend
-    }).then( response => {
+    }) .then( response => {
         console.log( 'back from POST with:', response );
         getTasks();
-    }).catch( err => {
+        clearTaskInput();
+    } ).catch( err => {
         console.log( 'error in addTask', err );
-    }) // end AJAX POST
-    // TODO clearTaskInputs();
+    } ) // end AJAX POST
 } // end addTask
+
+function clearTaskInput(){
+    $( '#taskIn' ).val('');
+} // end clearTaskInput
 
 function completeBtn(){
     console.log( 'in completeBtn' );
