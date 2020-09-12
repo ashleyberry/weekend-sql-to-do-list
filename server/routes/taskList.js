@@ -37,7 +37,7 @@ router.get( '/', ( req, res ) => {
     } ); // end query
 } ); // end /tasks GET
 
-router.post('/',  ( req, res ) => {
+router.post( '/',  ( req, res ) => {
     let newTask = req.body;
     console.log( `Adding task`, newTask );
     let queryString = `INSERT INTO "tasks" ( "task" ) VALUES ( $1 );`;
@@ -51,7 +51,26 @@ router.post('/',  ( req, res ) => {
       } ); // end query
   } ); // end /tasks POST
 
-
-// TODO router.delete
+// Updates a task to show that it has been completed
+// Request must include a parameter indicating what task to update - the id
+// Request body must include the content to update - the status
+router.put( '/:id',  ( req, res ) => {
+  let task = req.body; // task with updated content
+  let id = req.params.id; // id of the task to update
+  console.log(`Updating task ${ id } with:`, task);
+  let queryString = '';
+  console.log( 'task.newPending:', task.newPending )
+  if( task.newPending === 'true' ){
+    queryString = `UPDATE "tasks" SET "complete" = 'true' WHERE "id" = $1;`
+  } 
+  pool.query( queryString, [ id ] )
+  .then( result => {
+    console.log( 'result from PUT:', result );
+    res.sendStatus( 200 );
+  }).catch( err => {
+    console.log( 'result from PUT:', err );
+    res.sendStatus(500);
+  }) // end query
+}); // end /tasks PUT
 
 module.exports = router;

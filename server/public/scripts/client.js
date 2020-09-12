@@ -3,16 +3,13 @@ $( document ).ready( onReady );
 function onReady(){
     console.log( 'in onReady' );
     getTasks();
-    $( document ).on( 'click', '#addTaskBtn', addTask );
-    $( document ).on( 'click', '.completeBtn', completeBtn );  
+    $( '#addTaskBtn' ).on( 'click', handleAddTask );
+    $( document ).on( 'click', '.completeBtn', statusCompleteBtn );  
     $( document ).on( 'click', '.deleteBtn', deleteBtn );
 } // end onReady
 
-function addTask(){
+function addTask( taskToSend ){
     console.log( 'in addTask' );
-    let taskToSend = {
-        task: $( '#taskIn' ).val(),
-    } // end book to send
     $.ajax( {
         method: 'POST',
         url: '/taskList',
@@ -30,10 +27,6 @@ function clearTaskInput(){
     $( '#taskIn' ).val('');
 } // end clearTaskInput
 
-function completeBtn(){
-    console.log( 'in completeBtn' );
-} // end completeBtn
-
 function deleteBtn(){
     console.log( 'in deleteBtn' );
     let taskId = $( this ).data( 'id' );
@@ -49,6 +42,13 @@ function deleteBtn(){
         alert('oh noes!');
     }) // end AJAX
 } // end deleteBtn
+
+function handleAddTask(){
+    console.log( 'in handleAddTask' );
+    let taskToSend = {};
+    taskToSend.task = $( '#taskIn' ).val();
+    addTask( taskToSend );
+} // end handleAddTask
 
 // gets all tasks from the server and renders to page
 function getTasks(){
@@ -74,7 +74,7 @@ function renderTasks( response ){
     for( let i=0; i<response.length; i++ ){
          el.append( `
          <tr>
-            <td>${ response[ i ].task }</td>
+            <td class='task'>${ response[ i ].task }</td>
             <td>
                 <button class='completeBtn' 
                 data-id='${ response[ i ].id }' 
@@ -84,3 +84,26 @@ function renderTasks( response ){
         </tr>`)
     } // end for
 } // end renderTasks
+
+function statusCompleteBtn(){
+    console.log( 'in statusCompleteBtn' );
+    // make visual change on DOM
+    let tr = $( this ).parent().siblings( '.task' );
+    $( tr ).removeClass( 'task' );
+    $( tr ).addClass( 'complete' );
+    console.log( 'newtr:', tr )
+    let taskId = $( this ).data( 'id' );
+    let pendingStatus = $( this ).data( 'pending' ) // will be false
+    console.log( 'in statusCompleteBtn:', taskId, pendingStatus );
+    $.ajax({
+        method: 'PUT', 
+        url: `/taskList/${ taskId }`,
+        data: { newPending: !pendingStatus }
+    }).then( response => {
+        console.log( 'response from statusReadBtn:', response );
+        //getTasks();
+    }).catch( err => {
+        console.log( 'error in statusCompleteBtn', err )
+        alert('oh noes!');
+    }) // end AJAX
+} // end statusCompleteBtn

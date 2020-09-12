@@ -1,3 +1,7 @@
 body {
     background-color: peachpuff;
 }
+
+.complete {
+    background-color: rgb(118, 202, 118);
+}

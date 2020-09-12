@@ -14,10 +14,8 @@
 [x] view new tasks in dom
 [x] clear input function
 [x] delete btn function
-[ ] complete button functionality
-[ ] refresh function to show only incomplete tasks
-[ ] if incomplete, append complete btn
-[ ] if completed task, add class/id for visual change (ex: container bkgrd change gry to grn)
+[x] complete button functionality
+[x] if completed task, add class/id for visual change (ex: container bkgrd change gry to grn)
 [ ] if completed task, add class/id to check option off (in css)
 [ ] checked off task sent to db
 [ ] if deleted, remove task from front end
