@@ -7,10 +7,6 @@ body {
     background-color: rgb(118, 202, 118);
 }
 
-.finishedCompleteBtn {
-    text-decoration: line-through;
-}
-
 h1 {
     margin: 0;
     text-align: center;
