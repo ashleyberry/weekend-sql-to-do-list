@@ -4,7 +4,9 @@ function onReady(){
     console.log( 'in onReady' );
     getTasks();
     $( '#addTaskBtn' ).on( 'click', handleAddTask );
-    $( document ).on( 'click', '.completeBtn', statusCompleteBtn );  
+    $( document ).on( 'click', '.completeBtn', displayAsCompleted );
+    $( document ).on( 'click', '.completeBtn', disableCompleteButton );
+    $( document ).on( 'click', '.completeBtn', statusCompleteBtn );
     $( document ).on( 'click', '.deleteBtn', deleteBtn );
 } // end onReady
 
@@ -42,6 +44,22 @@ function deleteBtn(){
         alert('oh noes!');
     }) // end AJAX
 } // end deleteBtn
+
+// disable the complete button upon completion
+function disableCompleteButton(){
+    console.log( 'in disableCompleteButton' );
+    $( this ).removeClass( 'completeBtn' );
+    $( this ).addClass ( 'finishedCompleteBtn' );
+    $( this ).prop( 'disabled', true );
+} // end disableCompleteButton
+
+// visual display on DOM of completed status
+function displayAsCompleted(){
+    console.log ( 'in displayAsCompleted' )
+    let tr = $( this ).parent().siblings( '.task' );
+    $( tr ).removeClass( 'task' );
+    $( tr ).addClass( 'complete' );
+} // end displayAsCompleted
 
 function handleAddTask(){
     console.log( 'in handleAddTask' );
@@ -88,10 +106,9 @@ function renderTasks( response ){
 function statusCompleteBtn(){
     console.log( 'in statusCompleteBtn' );
     // make visual change on DOM
-    let tr = $( this ).parent().siblings( '.task' );
-    $( tr ).removeClass( 'task' );
-    $( tr ).addClass( 'complete' );
-    console.log( 'newtr:', tr )
+    displayAsCompleted()
+    // disable button
+    disableCompleteButton()
     let taskId = $( this ).data( 'id' );
     let pendingStatus = $( this ).data( 'pending' ) // will be false
     console.log( 'in statusCompleteBtn:', taskId, pendingStatus );
@@ -107,3 +124,4 @@ function statusCompleteBtn(){
         alert('oh noes!');
     }) // end AJAX
 } // end statusCompleteBtn
+

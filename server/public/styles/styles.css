@@ -5,3 +5,7 @@ body {
 .complete {
     background-color: rgb(118, 202, 118);
 }
+
+.finishedCompleteBtn {
+    text-decoration: line-through;
+}
