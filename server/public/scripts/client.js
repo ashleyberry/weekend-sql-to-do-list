@@ -89,40 +89,32 @@ function renderTasks( response ){
     el.empty();
     for( let i=0; i<response.length; i++ ){
         if( response[ i ].complete ){ //if task is completed
-            // task is green
-            // complete button disabled
-            el.append( `
-                <tr>
+            el.append( `<tr>
                     <td class='complete'>${ response[ i ].task }</td>
                     <td>
-                        <button type='button' 
-                        id='completeBtn' 
+                        <button id='completeBtn' 
                         class='btn btn-success' 
                         data-id='${ response[ i ].id }'
                         data-pending='${ response[ i ].complete }'
                         disabled>Complete</button>
                     <td>
-                        <button type='button'
-                        id='deleteBtn' 
+                        <button id='deleteBtn' 
                         class='btn btn-danger' 
                         data-id='${response[i].id}'
                         >Delete</button>
                     </td>
                 </tr>`) 
         } else {
-            el.append( `
-                <tr>
+            el.append( `<tr>
                     <td class='task'>${ response[ i ].task }</td>
                     <td>
-                        <button type='button' 
-                        id='completeBtn' 
+                        <button id='completeBtn' 
                         class='btn btn-success' 
                         data-id='${ response[ i ].id }'
                         data-pending='${ response[ i ].complete }'
                         >Complete</button>
                     <td>
-                        <button type='button'
-                        id='deleteBtn' 
+                        <button id='deleteBtn' 
                         class='btn btn-danger' 
                         data-id='${response[i].id}'
                         >Delete</button>
@@ -134,12 +126,8 @@ function renderTasks( response ){
 
 function statusCompleteBtn(){
     console.log( 'in statusCompleteBtn' );
-    // make visual change on DOM
-    //displayAsCompleted()
-    // disable button
-    //disableCompleteButton()
     let taskId = $( this ).data( 'id' );
-    let pendingStatus = $( this ).data( 'pending' ) // will be false
+    let pendingStatus = $( this ).data( 'pending' )
     console.log( 'in statusCompleteBtn:', taskId, pendingStatus );
     $.ajax({
         method: 'PUT', 

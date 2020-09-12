@@ -24,6 +24,16 @@
 [x] font fam & size
 [ ] database.sql file includes all CREATE TABLE queries
 
+STRETCH
+`feature-styling-bootstrap` 
+[x] Add Bootstrap to the front end and style it up!
+[x] Buttons -- make the creation buttons and completion buttons green 
+[x] make the delete buttons red
+[ ] Inputs -- make your text inputs styled in the bootstrap way
+[ ] Responsive -- make your app responsive to different screen sizes -- check out the [Layout](https://getbootstrap.com/docs/4.1/layout/overview/) section
+
+
+
 Reminders:
 --- you are a software engineer
 --- commit often
