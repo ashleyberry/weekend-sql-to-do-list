@@ -5,8 +5,8 @@
 [x] jquery working on client
 [x] uses, requires, consts, globals, listen on server
 [x] prep router
-[ ] task input - 
-[ ] input button
+[x] task input - 
+[x] input button
 [ ] task input btn function
 [ ] delete btn on append
 [x] create 'weekend-to-do-app' db in postico
