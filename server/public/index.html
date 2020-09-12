@@ -7,30 +7,40 @@
     <script src='vendors/jquery-3.5.1.min.js'></script>
     <script src='scripts/client.js'></script>
     <link rel='stylesheet' href='styles/styles.css'>
+     <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script></script>
 </head>
 <body>
     <header>
-        <h1>Fullstack To Do App</h1>
+        <div class='container-fluid'>
+            <h1>Fullstack To Do App</h1>
+        </div>
     </header>
     <main>
-        <section>
-            <label>Task</label>
-            <input type='text' id='taskIn'>
-            <button id='addTaskBtn'>Add task</button>
-        </section>
-        <section>
+        <form class='form-horizontal'>
+            <div class='form-group'>
+                <label class='sr-only' for='taskIn'>Add a task here</label>
+                <input type='text' class='form-control' id='taskIn' placeholder='Add a task here'>
+            </div>
+            <div class='form-group'>
+                <button id='addTaskBtn' class='btn btn-success'>Add task</button>
+            </div>
+        </form>
+        <div class='container-fluid'>
             <h3>Task List</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Task</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody id='tasksOut'>
-            </tbody>
-        </table>
+        </div>
+        <section>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class='tasksOut'>
+                </tbody>
+            </table>
         </section>
     </main>
 </body>

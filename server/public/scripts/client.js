@@ -4,10 +4,10 @@ function onReady(){
     console.log( 'in onReady' );
     getTasks();
     $( '#addTaskBtn' ).on( 'click', handleAddTask );
-    $( document ).on( 'click', '.completeBtn', displayAsCompleted );
-    $( document ).on( 'click', '.completeBtn', disableCompleteButton );
-    $( document ).on( 'click', '.completeBtn', statusCompleteBtn );
-    $( document ).on( 'click', '.deleteBtn', deleteBtn );
+    $( document ).on( 'click', '#completeBtn', displayAsCompleted );
+    $( document ).on( 'click', '#completeBtn', disableCompleteButton );
+    $( document ).on( 'click', '#completeBtn', statusCompleteBtn );
+    $( document ).on( 'click', '#deleteBtn', deleteBtn );
 } // end onReady
 
 function addTask( taskToSend ){
@@ -48,8 +48,6 @@ function deleteBtn(){
 // disable the complete button upon completion
 function disableCompleteButton(){
     console.log( 'in disableCompleteButton' );
-    $( this ).removeClass( 'completeBtn' );
-    $( this ).addClass ( 'finishedCompleteBtn' );
     $( this ).prop( 'disabled', true );
 } // end disableCompleteButton
 
@@ -74,11 +72,11 @@ function getTasks(){
     $.ajax({
         method: 'GET',
         url: '/taskList'
-    }).then( function( response ){
+    }).then( response => {
         console.log( 'back from GET with:', response ); 
         // display tasks on DOM 
         renderTasks( response );
-    }).catch( function( err ){
+    }).catch( err => {
         alert( 'error!' );
         console.log( 'error in getTasks', err );
     }) // end AJAX GET
@@ -87,43 +85,49 @@ function getTasks(){
 // Display an array of tasks on the DOM
 function renderTasks( response ){
     console.log( 'in renderTasks' );
-    let el = $( '#tasksOut' );
+    let el = $( '.tasksOut' );
     el.empty();
     for( let i=0; i<response.length; i++ ){
-        if( response[ i ].complete === false ){
-            el.append( `
-            <tr>
-                <td class='task'>${ response[ i ].task }</td>
-                <td>
-                    <button class='completeBtn' 
-                    data-id='${ response[ i ].id }' 
-                    data-pending='${ response[ i ].complete }'>Complete</button>
-                </td>
-                <td><button class='deleteBtn' data-id=${response[i].id}>Delete</button></td>
-            </tr>`)
+        if( response[ i ].complete ){ //if task is completed
+            el.append( `<tr>
+                    <td class='complete'>${ response[ i ].task }</td>
+                    <td>
+                        <button id='completeBtn' 
+                        class='btn btn-success' 
+                        data-id='${ response[ i ].id }'
+                        data-pending='${ response[ i ].complete }'
+                        disabled>Complete</button>
+                    <td>
+                        <button id='deleteBtn' 
+                        class='btn btn-danger' 
+                        data-id='${response[ i ].id}'
+                        >Delete</button>
+                    </td>
+                </tr>`) 
         } else {
-            el.append( `
-            <tr>
-                <td class='complete'>${ response[ i ].task }</td>
-            <td>
-                <button class='finishedCompleteBtn' 
-                data-id='${ response[ i ].id }' 
-                data-pending='${ response[ i ].complete }'>Complete</button>
-            </td>
-            <td><button class='deleteBtn' data-id=${response[i].id}>Delete</button></td>
-        </tr>`)
+            el.append( `<tr>
+                    <td class='task'>${ response[ i ].task }</td>
+                    <td>
+                        <button id='completeBtn' 
+                        class='btn btn-success' 
+                        data-id='${ response[ i ].id }'
+                        data-pending='${ response[ i ].complete }'
+                        >Complete</button>
+                    <td>
+                        <button id='deleteBtn' 
+                        class='btn btn-danger' 
+                        data-id='${response[ i ].id}'
+                        >Delete</button>
+                    </td>
+                </tr>`) 
         } // end else
     } // end for
 } // end renderTasks
 
 function statusCompleteBtn(){
     console.log( 'in statusCompleteBtn' );
-    // make visual change on DOM
-    displayAsCompleted()
-    // disable button
-    disableCompleteButton()
     let taskId = $( this ).data( 'id' );
-    let pendingStatus = $( this ).data( 'pending' ) // will be false
+    let pendingStatus = $( this ).data( 'pending' )
     console.log( 'in statusCompleteBtn:', taskId, pendingStatus );
     $.ajax({
         method: 'PUT', 
@@ -131,7 +135,6 @@ function statusCompleteBtn(){
         data: { newPending: !pendingStatus }
     }).then( response => {
         console.log( 'response from statusReadBtn:', response );
-        //getTasks();
     }).catch( err => {
         console.log( 'error in statusCompleteBtn', err )
         alert('oh noes!');
