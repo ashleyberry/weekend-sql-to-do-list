@@ -4,14 +4,17 @@
 [x] npm start that shit up
 [x] jquery working on client
 [x] uses, requires, consts, globals, listen on server
+[x] set up db pool
 [x] prep router
-[x] task input - 
-[x] input button
-[ ] task input btn function
-[ ] delete btn on append
+[x] get task functionality
+[ ] task input button functionality 
+[ ] post task functionality (data received in db)
+[ ] view new tasks in dom
+[ ] complete button functionality
+[ ] delete btn function
+[ ] clear input function
 [x] create 'weekend-to-do-app' db in postico
-[ ] create table: task(VARCHAR), completed(boolean)
-[ ] send data to SQL
+[x] create table: task(VARCHAR), completed(boolean)
 [ ] refresh function to show only incomplete tasks
 [ ] if incomplete, append complete btn
 [ ] if completed task, add class/id for visual change (ex: container bkgrd change gry to grn)

@@ -12,6 +12,16 @@ const pool = new Pool({
 }); // end pool setup
 
 // TODO router.get
+router.get( '/', ( req, res ) => {
+    console.log( 'in /tasks GET' );
+    const queryString = 'SELECT * FROM "tasks";';
+    pool.query( queryString ).then( results => {
+        res.send( results.rows );
+    }).catch( err => {
+        console.log( 'error running query', err );
+        res.sendStatus( 500 );
+    }); // end query
+}); // end /tasks GET
 
 // TODO router.post
 

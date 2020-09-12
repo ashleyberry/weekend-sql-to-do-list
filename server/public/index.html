@@ -15,11 +15,29 @@
     </header>
     <main>
         <section>
-            <h3>Add Task Item</h3>
             <label>Task</label>
             <input type='text' id='taskIn'>
             <button id='addTaskBtn'>Add task</button>
         </section>
+        <table>
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id='tasksOut'>
+                <tr>
+                    <td>Practice Yoga</td>
+                    <td><button class='completeBtn'>Complete</button></td>
+                    <td><button class='deleteBtn'>Delete</button></td>
+                </tr>
+                <tr>
+                    <td>Walk the Cat</td>
+                    <td><button class='deleteBtn'>Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
     </main>
 </body>
 </html>
