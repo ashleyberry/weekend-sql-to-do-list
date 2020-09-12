@@ -22,7 +22,7 @@
 [x] checked off task sent to db
 [x] background color
 [x] font fam & size
-[ ] database.sql file includes all CREATE TABLE queries
+[x] database.sql file includes all CREATE TABLE queries
 
 STRETCH
 `feature-styling-bootstrap` 
