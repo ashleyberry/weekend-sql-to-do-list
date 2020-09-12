@@ -36,6 +36,18 @@ function completeBtn(){
 
 function deleteBtn(){
     console.log( 'in deleteBtn' );
+    let taskId = $( this ).data( 'id' );
+    console.log( 'taskId:', taskId );
+    $.ajax({
+        method: 'DELETE',
+        url: `/taskList/${ taskId }` 
+    }).then( response => {
+        console.log( 'Deleted!', response )
+        getTasks();
+    }).catch( err => {
+        console.log( 'error in delete', err )
+        alert('oh noes!');
+    }) // end AJAX
 } // end deleteBtn
 
 // gets all tasks from the server and renders to page
@@ -68,7 +80,7 @@ function renderTasks( response ){
                 data-id='${ response[ i ].id }' 
                 data-pending='${ response[ i ].complete }'>Complete</button>
             </td>
-            <td><button class='deleteBtn'>Delete</button></td>
+            <td><button class='deleteBtn' data-id=${response[i].id}>Delete</button></td>
         </tr>`)
     } // end for
 } // end renderTasks

@@ -13,7 +13,7 @@
 [x] post task functionality (data received in db)
 [x] view new tasks in dom
 [x] clear input function
-[ ] delete btn function
+[x] delete btn function
 [ ] complete button functionality
 [ ] refresh function to show only incomplete tasks
 [ ] if incomplete, append complete btn

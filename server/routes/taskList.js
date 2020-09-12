@@ -11,7 +11,21 @@ const pool = new Pool( {
     idleTimeoutMillis: 20000
 } ); // end pool setup
 
-// TODO router.get
+router.delete( '/:id', ( req, res )=>{
+  let taskId = req.params.id;
+  const queryString = `DELETE FROM "tasks" WHERE "id" = $1;`;
+  console.log( 'going to delete task with id:', taskId );
+  // execute DB query
+  pool.query( queryString, [ taskId ] )
+  .then( response => {
+      console.log( 'deleted task!' );
+      res.sendStatus( 200 );
+  }).catch( err => {
+      console.log( 'error deleting task', err );
+      res.sendStatus( 500 );
+  }) // end query
+}) // end delete tasks
+
 router.get( '/', ( req, res ) => {
     console.log( 'in /tasks GET' );
     const queryString = 'SELECT * FROM "tasks";';
@@ -23,9 +37,6 @@ router.get( '/', ( req, res ) => {
     } ); // end query
 } ); // end /tasks GET
 
-// TODO router.post
-// Adds a new tasks to the list of tasks
-// Request body must be a task object with a task.
 router.post('/',  ( req, res ) => {
     let newTask = req.body;
     console.log( `Adding task`, newTask );
