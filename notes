@@ -4,17 +4,17 @@
 [x] npm start that shit up
 [x] jquery working on client
 [x] uses, requires, consts, globals, listen on server
+[x] create 'weekend-to-do-app' db in postico
+[x] create table: task(VARCHAR), completed(boolean)
 [x] set up db pool
 [x] prep router
 [x] get task functionality
-[ ] task input button functionality 
-[ ] post task functionality (data received in db)
-[ ] view new tasks in dom
-[ ] complete button functionality
-[ ] delete btn function
+[x] task input button functionality 
+[x] post task functionality (data received in db)
+[x] view new tasks in dom
 [ ] clear input function
-[x] create 'weekend-to-do-app' db in postico
-[x] create table: task(VARCHAR), completed(boolean)
+[ ] delete btn function
+[ ] complete button functionality
 [ ] refresh function to show only incomplete tasks
 [ ] if incomplete, append complete btn
 [ ] if completed task, add class/id for visual change (ex: container bkgrd change gry to grn)
@@ -22,11 +22,9 @@
 [ ] checked off task sent to db
 [ ] if deleted, remove task from front end
 [ ] if deleted, remove task from db
-
 [ ] background color
 [ ] font fam & size
 [ ] text color or bkgrd color should change if complete
-
 [ ] database.sql file includes all CREATE TABLE queries
 
 Reminders:

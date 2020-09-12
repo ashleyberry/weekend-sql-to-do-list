@@ -13,15 +13,15 @@ function addTask(){
     let taskToSend = {
         task: $( '#taskIn' ).val(),
     } // end book to send
-    $.ajax({
+    $.ajax( {
         method: 'POST',
-        url: '/tasks',
+        url: '/taskList',
         data: taskToSend
-    }).then( function( response ){
+    }).then( response => {
         console.log( 'back from POST with:', response );
-        // TODO getTasks function
-    }).catch( function( err ){
-        console.log( err );
+        getTasks();
+    }).catch( err => {
+        console.log( 'error in addTask', err );
     }) // end AJAX POST
     // TODO clearTaskInputs();
 } // end addTask
@@ -34,6 +34,7 @@ function deleteBtn(){
     console.log( 'in deleteBtn' );
 } // end deleteBtn
 
+// gets all tasks from the server and renders to page
 function getTasks(){
     console.log( 'in getTasks' );
     $.ajax({
@@ -42,15 +43,16 @@ function getTasks(){
     }).then( function( response ){
         console.log( 'back from GET with:', response ); 
         // display tasks on DOM 
-        displayTasks( response );
+        renderTasks( response );
     }).catch( function( err ){
         alert( 'error!' );
         console.log( 'error in getTasks', err );
     }) // end AJAX GET
 } // end getTasks
 
-function displayTasks( response ){
-    console.log( 'in displayTasks' );
+// Display an array of tasks on the DOM
+function renderTasks( response ){
+    console.log( 'in renderTasks' );
     let el = $( '#tasksOut' );
     el.empty();
     for( let i=0; i<response.length; i++ ){
@@ -65,4 +67,4 @@ function displayTasks( response ){
             <td><button class='deleteBtn'>Delete</button></td>
         </tr>`)
     } // end for
-} // end displayTasks
+} // end renderTasks
