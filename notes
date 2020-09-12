@@ -14,15 +14,14 @@
 [x] view new tasks in dom
 [x] clear input function
 [x] delete btn function
+[x] if deleted, remove task from front end
+[x] if deleted, remove task from db
 [x] complete button functionality
 [x] if completed task, add class/id for visual change (ex: container bkgrd change gry to grn)
 [x] if completed task, add class/id to check option off (in css)
 [x] checked off task sent to db
-[ ] if deleted, remove task from front end
-[ ] if deleted, remove task from db
-[ ] background color
-[ ] font fam & size
-[ ] text color or bkgrd color should change if complete
+[x] background color
+[x] font fam & size
 [ ] database.sql file includes all CREATE TABLE queries
 
 Reminders:

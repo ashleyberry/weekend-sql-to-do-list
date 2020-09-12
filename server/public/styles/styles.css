@@ -1,5 +1,6 @@
 body {
-    background-color: peachpuff;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .complete {
@@ -9,3 +10,45 @@ body {
 .finishedCompleteBtn {
     text-decoration: line-through;
 }
+
+h1 {
+    margin: 0;
+    text-align: center;
+}
+
+header {
+    background-color: aliceblue;
+    padding: 2em;
+}
+
+main {
+    margin: auto;
+    margin-top: 1em;
+    text-align: center;
+    width: 90%;
+}
+
+section {
+    background-color: oldlace;
+    padding: .5em;
+    margin-bottom: 1em;
+}
+
+table {
+    margin-left: auto; 
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+td {
+    border: solid black 1px;
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+td.task {
+    width: 70%;
+
+}
+

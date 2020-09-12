@@ -90,16 +90,29 @@ function renderTasks( response ){
     let el = $( '#tasksOut' );
     el.empty();
     for( let i=0; i<response.length; i++ ){
-         el.append( `
-         <tr>
-            <td class='task'>${ response[ i ].task }</td>
+        if( response[ i ].complete === false ){
+            el.append( `
+            <tr>
+                <td class='task'>${ response[ i ].task }</td>
+                <td>
+                    <button class='completeBtn' 
+                    data-id='${ response[ i ].id }' 
+                    data-pending='${ response[ i ].complete }'>Complete</button>
+                </td>
+                <td><button class='deleteBtn' data-id=${response[i].id}>Delete</button></td>
+            </tr>`)
+        } else {
+            el.append( `
+            <tr>
+                <td class='complete'>${ response[ i ].task }</td>
             <td>
-                <button class='completeBtn' 
+                <button class='finishedCompleteBtn' 
                 data-id='${ response[ i ].id }' 
                 data-pending='${ response[ i ].complete }'>Complete</button>
             </td>
             <td><button class='deleteBtn' data-id=${response[i].id}>Delete</button></td>
         </tr>`)
+        } // end else
     } // end for
 } // end renderTasks
 
