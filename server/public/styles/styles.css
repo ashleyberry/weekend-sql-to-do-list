@@ -7,6 +7,10 @@ body {
     background-color: rgb(118, 202, 118);
 }
 
+.form-horizontal {
+    margin-bottom: 3em;
+}
+
 h1 {
     margin: 0;
     text-align: center;
@@ -45,6 +49,5 @@ td {
 
 td.task {
     width: 70%;
-
 }
 

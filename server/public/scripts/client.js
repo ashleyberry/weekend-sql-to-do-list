@@ -76,7 +76,7 @@ function getTasks(){
         console.log( 'back from GET with:', response ); 
         // display tasks on DOM 
         renderTasks( response );
-    }).catch( function( err ){
+    }).catch( err => {
         alert( 'error!' );
         console.log( 'error in getTasks', err );
     }) // end AJAX GET
@@ -85,7 +85,7 @@ function getTasks(){
 // Display an array of tasks on the DOM
 function renderTasks( response ){
     console.log( 'in renderTasks' );
-    let el = $( '#tasksOut' );
+    let el = $( '.tasksOut' );
     el.empty();
     for( let i=0; i<response.length; i++ ){
         if( response[ i ].complete ){ //if task is completed
@@ -100,7 +100,7 @@ function renderTasks( response ){
                     <td>
                         <button id='deleteBtn' 
                         class='btn btn-danger' 
-                        data-id='${response[i].id}'
+                        data-id='${response[ i ].id}'
                         >Delete</button>
                     </td>
                 </tr>`) 
@@ -116,7 +116,7 @@ function renderTasks( response ){
                     <td>
                         <button id='deleteBtn' 
                         class='btn btn-danger' 
-                        data-id='${response[i].id}'
+                        data-id='${response[ i ].id}'
                         >Delete</button>
                     </td>
                 </tr>`) 
@@ -135,7 +135,6 @@ function statusCompleteBtn(){
         data: { newPending: !pendingStatus }
     }).then( response => {
         console.log( 'response from statusReadBtn:', response );
-        //getTasks();
     }).catch( err => {
         console.log( 'error in statusCompleteBtn', err )
         alert('oh noes!');
