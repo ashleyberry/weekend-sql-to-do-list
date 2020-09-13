@@ -3,16 +3,17 @@ $( document ).ready( onReady );
 function onReady(){
     console.log( 'in onReady' );
     getTasks();
+    $( '#MyModal' ).modal();
     $( '#addTaskBtn' ).on( 'click', handleAddTask );
     $( document ).on( 'click', '#completeBtn', displayAsCompleted );
     $( document ).on( 'click', '#completeBtn', disableCompleteButton );
     $( document ).on( 'click', '#completeBtn', statusCompleteBtn );
-    $( document ).on( 'click', '#deleteBtn', deleteBtn );
+    $( document ).on( 'click', '#deleteBtn', deleteTask );
 } // end onReady
 
 function addTask( taskToSend ){
     console.log( 'in addTask' );
-    $.ajax( {
+    $.ajax({
         method: 'POST',
         url: '/taskList',
         data: taskToSend
@@ -22,15 +23,15 @@ function addTask( taskToSend ){
         clearTaskInput();
     } ).catch( err => {
         console.log( 'error in addTask', err );
-    } ) // end AJAX POST
+    }) // end AJAX POST
 } // end addTask
 
 function clearTaskInput(){
     $( '#taskIn' ).val('');
 } // end clearTaskInput
 
-function deleteBtn(){
-    console.log( 'in deleteBtn' );
+function deleteTask(){
+    console.log( 'in deleteTask' );
     let taskId = $( this ).data( 'id' );
     console.log( 'taskId:', taskId );
     $.ajax({
@@ -43,7 +44,7 @@ function deleteBtn(){
         console.log( 'error in delete', err )
         alert('oh noes!');
     }) // end AJAX
-} // end deleteBtn
+} // end deleteTask
 
 // disable the complete button upon completion
 function disableCompleteButton(){
@@ -89,16 +90,19 @@ function renderTasks( response ){
     el.empty();
     for( let i=0; i<response.length; i++ ){
         if( response[ i ].complete ){ //if task is completed
-            el.append( `<tr>
+            el.append( 
+                `<tr>
                     <td class='complete'>${ response[ i ].task }</td>
                     <td>
-                        <button id='completeBtn' 
+                        <button type='button'
+                        id='completeBtn' 
                         class='btn btn-success' 
                         data-id='${ response[ i ].id }'
                         data-pending='${ response[ i ].complete }'
                         disabled>Complete</button>
                     <td>
-                        <button id='deleteBtn' 
+                        <button type='button'
+                        id='deleteBtn' 
                         class='btn btn-danger' 
                         data-id='${response[ i ].id}'
                         >Delete</button>
@@ -108,16 +112,22 @@ function renderTasks( response ){
             el.append( `<tr>
                     <td class='task'>${ response[ i ].task }</td>
                     <td>
-                        <button id='completeBtn' 
+                        <button type='button'
+                        id='completeBtn' 
                         class='btn btn-success' 
                         data-id='${ response[ i ].id }'
                         data-pending='${ response[ i ].complete }'
                         >Complete</button>
                     <td>
-                        <button id='deleteBtn' 
+                    <td>
+                        <button type='button'
+                        id='deleteBtn' 
                         class='btn btn-danger' 
-                        data-id='${response[ i ].id}'
-                        >Delete</button>
+                        data-toggle='modal'
+                        data-target='#myModal'
+                        data-id='${response[ i ].id}'>
+                        Delete
+                        </button>  
                     </td>
                 </tr>`) 
         } // end else
@@ -140,4 +150,3 @@ function statusCompleteBtn(){
         alert('oh noes!');
     }) // end AJAX
 } // end statusCompleteBtn
-
