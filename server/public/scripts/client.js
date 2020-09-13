@@ -33,14 +33,6 @@ function clearTaskInput(){
 
 let taskId;
 
-// get taskId from modal btn and assign to global variable
-function grabTaskIdFromModalBtn(){
-    console.log( 'in grabTaskIdFromModalBtn' );
-    taskId = $( this ).data( 'id' );
-    console.log( 'taskId:', taskId );
-    // assign taskId to deleteBtn
-} // end grabTaskIdFromModalBtn
-
 function deleteTask(){
     console.log( 'in deleteTask', taskId );
     $.ajax({
@@ -68,6 +60,14 @@ function displayAsCompleted(){
     $( tr ).removeClass( 'task' );
     $( tr ).addClass( 'complete' );
 } // end displayAsCompleted
+
+// get taskId from modal btn and assign to global variable
+function grabTaskIdFromModalBtn(){
+    console.log( 'in grabTaskIdFromModalBtn' );
+    taskId = $( this ).data( 'id' );
+    console.log( 'taskId:', taskId );
+    // assign taskId to deleteBtn
+} // end grabTaskIdFromModalBtn
 
 function handleAddTask(){
     console.log( 'in handleAddTask' );
@@ -108,13 +108,18 @@ function renderTasks( response ){
                         class='btn btn-success' 
                         data-id='${ response[ i ].id }'
                         data-pending='${ response[ i ].complete }'
-                        disabled>Complete</button>
+                        disabled>
+                        Complete
+                        </button>
                     <td>
-                        <button type='button'
-                        id='deleteBtn' 
+                        <button type='button' 
                         class='btn btn-danger' 
-                        data-id='${response[ i ].id}'
-                        >Delete</button>
+                        id='modalDeleteBtn' 
+                        data-target='#myModal' 
+                        data-id='${response[ i ].id}' 
+                        data-toggle='modal'>
+                        Delete
+                        </button> 
                     </td>
                 </tr>`) 
         } else {
@@ -125,14 +130,21 @@ function renderTasks( response ){
                         id='completeBtn' 
                         class='btn btn-success' 
                         data-id='${ response[ i ].id }'
-                        data-pending='${ response[ i ].complete }'
-                        >Complete</button>
+                        data-pending='${ response[ i ].complete }'>
+                        Complete
+                        </button>
                     </td>
                     <td>
-                        <button type='button' class='btn btn-danger' id='modalDeleteBtn' data-target='#myModal' data-id='${response[ i ].id}' data-toggle='modal'>Delete</button> 
+                        <button type='button' 
+                        class='btn btn-danger' 
+                        id='modalDeleteBtn' 
+                        data-target='#myModal' 
+                        data-id='${ response[ i ].id }' 
+                        data-toggle='modal'>
+                        Delete
+                        </button> 
                     </td>
                 </tr>`)     
-            
         } // end else
     } // end for
 } // end renderTasks
