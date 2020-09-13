@@ -11,6 +11,9 @@ function onReady(){
     $( document ).on( 'click', '#deleteBtn', deleteTask );
 } // end onReady
 
+let modalId = [];
+console.log('modalId:', modalId)
+
 function addTask( taskToSend ){
     console.log( 'in addTask' );
     $.ajax({
@@ -118,18 +121,37 @@ function renderTasks( response ){
                         data-id='${ response[ i ].id }'
                         data-pending='${ response[ i ].complete }'
                         >Complete</button>
-                    <td>
-                    <td>
-                        <button type='button'
-                        id='deleteBtn' 
-                        class='btn btn-danger' 
-                        data-toggle='modal'
-                        data-target='#myModal'
-                        data-id='${response[ i ].id}'>
-                        Delete
-                        </button>  
                     </td>
-                </tr>`) 
+                    <td>
+                        <div class="text-center">
+                            <a href="#myModal" class='btn btn-danger' data-id='${response[ i ].id}' data-toggle='modal'>Delete</a>
+                        </div>
+                
+                        <!-- Modal HTML -->
+                        <div id="myModal" class="modal fade">
+                            <div class="modal-dialog modal-confirm">
+                                <div class="modal-content">
+                                    <div class="modal-header flex-column">
+                                        <div class="icon-box">
+                                            <i class="material-icons">&#xE5CD;</i>
+                                        </div>						
+                                        <h4 class="modal-title w-100">Are you sure?</h4>	
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Do you really want to delete this task? This process cannot be undone.</p>
+                                    </div>
+                                    <div class="modal-footer justify-content-center">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal" >Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>     
+                    </td>
+                </tr>`)
+                modalId = $(this).closest( 'id' )
+                console.log( modalId )             
         } // end else
     } // end for
 } // end renderTasks
