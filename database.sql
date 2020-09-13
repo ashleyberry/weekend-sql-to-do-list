@@ -5,10 +5,9 @@ CREATE TABLE "tasks" (
 );
 
 INSERT INTO "tasks" ("task") 
-    VALUES ('Feed the fish'),
+VALUES ('Send sibling nostalgic gifs'),
+    ('Play the floor is lava'),
     ('Look at memes'),
     ('Water plants'),
-    ('Sing in the shower'),
     ('Walk the dog'),
-    ('Weed the garden'),
-    ('Play the floor is lava');
+    ('Weed the garden');
