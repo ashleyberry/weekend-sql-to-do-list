@@ -9,10 +9,8 @@ function onReady(){
     $( document ).on( 'click', '#completeBtn', disableCompleteButton );
     $( document ).on( 'click', '#completeBtn', statusCompleteBtn );
     $( document ).on( 'click', '#deleteBtn', deleteTask );
+    $( document ).on( 'click', '#modalDeleteBtn', grabTaskIdFromModalBtn );
 } // end onReady
-
-let modalId = [];
-console.log('modalId:', modalId)
 
 function addTask( taskToSend ){
     console.log( 'in addTask' );
@@ -33,10 +31,18 @@ function clearTaskInput(){
     $( '#taskIn' ).val('');
 } // end clearTaskInput
 
-function deleteTask(){
-    console.log( 'in deleteTask' );
-    let taskId = $( this ).data( 'id' );
+let taskId;
+
+// get taskId from modal btn and assign to global variable
+function grabTaskIdFromModalBtn(){
+    console.log( 'in grabTaskIdFromModalBtn' );
+    taskId = $( this ).data( 'id' );
     console.log( 'taskId:', taskId );
+    // assign taskId to deleteBtn
+} // end grabTaskIdFromModalBtn
+
+function deleteTask(){
+    console.log( 'in deleteTask', taskId );
     $.ajax({
         method: 'DELETE',
         url: `/taskList/${ taskId }` 
@@ -123,13 +129,10 @@ function renderTasks( response ){
                         >Complete</button>
                     </td>
                     <td>
-                        <div class="text-center">
-                            <button type='button' class='btn btn-danger' data-target='#myModal' data-id='${response[ i ].id}' data-toggle='modal'>Delete</button> 
-                        </div>
-                
-                        
+                        <button type='button' class='btn btn-danger' id='modalDeleteBtn' data-target='#myModal' data-id='${response[ i ].id}' data-toggle='modal'>Delete</button> 
                     </td>
                 </tr>`)     
+            
         } // end else
     } // end for
 } // end renderTasks

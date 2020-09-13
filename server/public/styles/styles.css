@@ -52,9 +52,9 @@ td.task {
 }
 
 
-
-
-
+/* the following is code from tutorialrepublic
+https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=delete-confirmation-modal
+*/
 .modal-confirm {		
     color: #636363;
     width: 400px;
