@@ -3,13 +3,30 @@ const pg = require( 'pg' );
 const router = express.Router();
 const Pool = pg.Pool;
 
-const pool = new Pool( {
-    database: "weekend-to-do-app",
-    host: "localhost",
+// const pool = new Pool( {
+//     database: 'weekend-to-do-app',
+//     host: 'localhost',
+//     port: 5432,
+//     max: 12,
+//     idleTimeoutMillis: 20000
+// } ); // end pool setup
+
+let pool;
+if ( process.env.DATABASE_URL ){
+  console.log( 'Connecting to a Heroku DB' );
+  pool = new pg.Pool({
+    connectionString: process.env.DATABASE_URL
+  })
+} else {
+  console.log( `assuming we're running locally` );
+  pool = new pg.Pool({
+    database: 'weekend-to-do-app',
+    host: 'localhost',
     port: 5432,
     max: 12,
     idleTimeoutMillis: 20000
-} ); // end pool setup
+  })
+}
 
 router.delete( '/:id', ( req, res )=>{
   let taskId = req.params.id;
@@ -57,7 +74,6 @@ router.post( '/',  ( req, res ) => {
 router.put( '/:id',  ( req, res ) => {
   let task = req.body; // task with updated content
   let id = req.params.id; // id of the task to update
-  console.log(`Updating task ${ id } with:`, task);
   let queryString = '';
   console.log( 'task.newPending:', task.newPending )
   if( task.newPending === 'true' ){
